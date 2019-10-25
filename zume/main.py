@@ -58,6 +58,9 @@ class LoanList(messages.Message):
 # AirportList: LoanList
 # IataApi: LoanApi
 
+# iata URL: https://zume-api-v2.appspot.com/_ah/api/iata/v1/airport/ABQ
+# loanbook URL: https://zume-api-v2.appspot.com/_ah/api/loanbook/v1/loan_app/0
+
 # [START loanbook_api]
 @endpoints.api(name='loanbook', version='v1')
 class LoanApi(remote.Service):
@@ -70,7 +73,7 @@ class LoanApi(remote.Service):
     def get_loan(self, request):
         if request.loan_id not in LOAN_BOOK:
             raise endpoints.NotFoundException()
-        return Loan_app(loan_id=request.loan_id, name=LOAN_BOOK[request.loan_id])
+        return Loan_app(loan_id=request.loan_id, loan_amnt=LOAN_BOOK[request.loan_amnt], funded_amnt=LOAN_BOOK[request.funded_amnt] )
 
 '''
     @endpoints.method(

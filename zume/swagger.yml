@@ -1,0 +1,395 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger ReST Article
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+# pseudo-code for the supported operations
+#   GET at loan_book/    # to read the loan_book dictionary
+#   POST at loan_book/   # to create an entry in the loan_book dictionary
+#   GET at loan_book/{loan_id}/     # read the loan_app with {loan_id} in the loan_book
+#   PUT at loan_book/{loan_id}/     # update the loan_app with {loan_id} in the loan_book
+#   DELETE at loan_book/{loan_id}/     # delete loan_app with {loan_id} in the loan_book
+#   PUT at loan_book/{loan_id}/predict   # updates the predict object in the loan_app with {loan_id} with the loan prediction
+#   GET at loan_book/{loan_id}/predict   # updates the predict object in the loan_app with {loan_id} with the loan prediction
+#   PUT at loan_book/predict        # updates the predict object of all of the loan_app objects
+
+
+
+paths:
+  /loan_book:
+    get:
+      operationId: server_Helper.read_all
+      tags:
+        - loan_book
+      summary: Read the entire list of loan_book
+      description: Read the list of loan_book
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Number of loan_applications to get from loan_book
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering loans
+          required: false
+      responses:
+        200:
+          description: Successfully read loan_book list operation
+          schema:
+            type: array
+            items:
+              properties:
+                loan_id:
+                  type: integer
+                loan_amnt:
+                  type: number
+                funded_amnt:
+                  type: number
+                funded_amnt_inv:
+                  type: number
+                term:
+                  type: number
+                int_rate:
+                  type: number
+                installment:
+                  type: number
+                annual_inc:
+                  type: number
+                dti:
+                  type: number
+                delinq_2yrs:
+                  type: number
+                inq_last_6mths:
+                  type: number
+                open_acc:
+                  type: number
+                pub_rec:
+                  type: number
+                revol_bal:
+                  type: number
+                total_acc:
+                  type: number
+                total_pymnt:
+                  type: number
+                total_pymnt_inv:
+                  type: number
+                total_rec_prncp:
+                  type: number
+                total_rec_int:
+                  type: number
+                total_rec_late_fee:
+                  type: number
+                recoveries:
+                  type: number
+                collection_recovery_fee:
+                  type: number
+                last_pymnt_amnt:
+                  type: number
+                pub_rec_bankruptcies:
+                  type: number
+                predict: 
+                  type: integer
+                timestamp:
+                  type: string
+
+    post:
+      operationId: server_Helper.create
+      tags:
+        - loan_book
+      summary: Create a new loan application and add it to the loan_book list
+      description: Create a new loan_application in the loan_book list
+      parameters:
+        - name: loan_application
+          in: body
+          description: loan application to create
+          required: True
+          schema:
+            type: object
+            properties:
+              loan_id:
+                type: integer
+                description: the loan_id of the loan application
+              loan_amnt:
+                type: number
+                description: the value of the loan amount
+              funded_amnt:
+                type: number
+                description: the value of the loan amount that was dispersed
+              funded_amnt_inv:
+                type: number
+                description: loan input feature
+              term:
+                type: number
+                description: loan input feature
+              int_rate:
+                type: number
+                description: loan input feature
+              installment:
+                type: number
+                description: loan input feature
+              annual_inc:
+                type: number
+                description: loan input feature
+              dti:
+                type: number
+                description: loan input feature
+              delinq_2yrs:
+                type: number
+                description: loan input feature
+              inq_last_6mths:
+                type: number
+                description: loan input feature
+              open_acc:
+                type: number
+                description: loan input feature
+              pub_rec:
+                type: number
+                description: loan input feature
+              revol_bal:
+                type: number
+                description: loan input feature
+              total_acc:
+                type: number
+                description: loan input feature
+              total_pymnt:
+                type: number
+                description: loan input feature
+              total_pymnt_inv:
+                type: number
+                description: loan input feature
+              total_rec_prncp:
+                type: number
+                description: loan input feature
+              total_rec_int:
+                type: number
+                description: loan input feature
+              total_rec_late_fee:
+                type: number
+                description: loan input feature
+              recoveries:
+                type: number
+                description: loan input feature
+              collection_recovery_fee:
+                type: number
+                description: loan input feature
+              last_pymnt_amnt:
+                type: number
+                description: loan input feature
+              pub_rec_bankruptcies:
+                type: number
+                description: loan input feature
+              predict: 
+                type: integer
+                description: a prediction of whether the loan application should be granted, true if accepted, false if denied
+              timestamp:
+                type: string
+      responses:
+        201:
+          description: Successfully created a loan application in list
+
+  /loan_book/{loan_id}:
+    get:
+      operationId: server_Helper.read_one
+      tags:
+        - loan_book
+      summary: Read one loan application from the loan_book list
+      description: Read one loan application from the loan_book list
+      parameters:
+        - name: loan_id
+          in: path
+          description: ID of the loan application to get from the list
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read loan application from loan_book list
+          schema:
+            properties:
+              loan_id:
+                type: integer
+              loan_amnt:
+                type: number
+              funded_amnt:
+                type: number
+              funded_amnt_inv:
+                type: number
+              term:
+                type: number
+              int_rate:
+                type: number
+              installment:
+                type: number
+              annual_inc:
+                type: number
+              dti:
+                type: number
+              delinq_2yrs:
+                type: number
+              inq_last_6mths:
+                type: number
+              open_acc:
+                type: number
+              pub_rec:
+                type: number
+              revol_bal:
+                type: number
+              total_acc:
+                type: number
+              total_pymnt:
+                type: number
+              total_pymnt_inv:
+                type: number
+              total_rec_prncp:
+                type: number
+              total_rec_int:
+                type: number
+              total_rec_late_fee:
+                type: number
+              recoveries:
+                type: number
+              collection_recovery_fee:
+                type: number
+              last_pymnt_amnt:
+                type: number
+              pub_rec_bankruptcies:
+                type: number
+              predict: 
+                type: integer
+              timestamp:
+                type: string
+    put:
+      operationId: server_Helper.update
+      tags:
+        - loan_book
+      summary: Update a loan application in the loan_book list
+      description: Update a loan application in the loan_book list
+      parameters:
+        - name: loan_id
+          in: path
+          description: ID of the loan application to update in the list
+          type: integer
+          required: True
+        - name: loan_application
+          in: body
+          schema:
+            type: object
+            properties:
+              loan_id:
+                type: integer
+              loan_amnt:
+                type: number
+              funded_amnt:
+                type: number
+              funded_amnt_inv:
+                type: number
+              term:
+                type: number
+              int_rate:
+                type: number
+              installment:
+                type: number
+              annual_inc:
+                type: number
+              dti:
+                type: number
+              delinq_2yrs:
+                type: number
+              inq_last_6mths:
+                type: number
+              open_acc:
+                type: number
+              pub_rec:
+                type: number
+              revol_bal:
+                type: number
+              total_acc:
+                type: number
+              total_pymnt:
+                type: number
+              total_pymnt_inv:
+                type: number
+              total_rec_prncp:
+                type: number
+              total_rec_int:
+                type: number
+              total_rec_late_fee:
+                type: number
+              recoveries:
+                type: number
+              collection_recovery_fee:
+                type: number
+              last_pymnt_amnt:
+                type: number
+              pub_rec_bankruptcies:
+                type: number
+              predict: 
+                type: integer
+              timestamp:
+                type: string
+      responses:
+        200:
+          description: Successfully updated loan application in loan_book list, predict cannot be updated with this function
+    
+    delete:
+      operationId: server_Helper.delete
+      tags:
+        - loan_book
+      summary: Delete a loan_application from the loan_book list
+      description: Delete a loan_application from the loan_book list
+      parameters:
+        - name: loan_id
+          in: path
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a person from loan_book list
+
+  /loan_book/{loan_id}/predict:
+    get:
+      operationId: server_Helper.read_predict
+      tags:
+        - loan_book
+      summary: Read the predict element of a loan application from the loan_book list
+      description: Read the predict element of a loan application from the loan_book list
+      parameters:
+        - name: loan_id
+          in: path
+          description: ID of the loan application whose predict elemment will be retrieved
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read predict element from the loan application from loan_book
+          schema:
+            properties:
+              loan_id:
+                type: integer
+              predict: 
+                type: integer
+    put:
+      operationId: server_Helper.update_predict
+      tags:
+        - loan_book
+      summary: Update the predict object of the loan application in the loan_book list
+      description: Update the predict objectloan application in the loan_book list
+      parameters:
+        - name: loan_id
+          in: path
+          description: ID of the loan application to update in the list
+          type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully updated loan application in loan_book list, predict cannot be updated with this function
+    

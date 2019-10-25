@@ -16,50 +16,63 @@
 Google Cloud Endpoints Frameworks for Python."""
 
 # [START imports]
+# import sys
+# sys.path
+# sys.path.append('/Users/dustin/CS/jobs/interview_problems/Zume/CreditClassification/src/server/gcp_api/zume_api/zume/lib')
+
 import endpoints
 from endpoints import message_types
 from endpoints import messages
 from endpoints import remote
 
-from data import AIRPORTS
+from data import LOAN_BOOK
+
 # [END imports]
 
 # [START messages]
-IATA_RESOURCE = endpoints.ResourceContainer(
-    iata=messages.StringField(1, required=True)
+LOAN_RESOURCE = endpoints.ResourceContainer(
+    loan_id=messages.IntegerField(1, required=True)
 )
 
 
-class Airport(messages.Message):
-    iata = messages.StringField(1, required=True)
-    name = messages.StringField(2, required=True)
+class Loan_app(messages.Message):
+    loan_id = messages.IntegerField(1, required=True)
+    loan_amnt = messages.IntegerField(2, required=False)
+    funded_amnt = messages.IntegerField(2, required=False)
 
 
-IATA_AIRPORT_RESOURCE = endpoints.ResourceContainer(
-    Airport,
-    iata=messages.StringField(1, required=True)
+LOAN_APP_RESOURCE = endpoints.ResourceContainer(
+    Loan_app,
+    loan_id=messages.IntegerField(1, required=True)
 )
 
 
-class AirportList(messages.Message):
-    airports = messages.MessageField(Airport, 1, repeated=True)
+class LoanList(messages.Message):
+    loans = messages.MessageField(Loan_app, 1, repeated=True)
 # [END messages]
 
+# mapping dict
+# IATA_RESOURCE: LOAN_RESOURCE
+# Airport: Loan_app
+# IATA_AIRPORT_RESOURCE: LOAN_APP_RESOURCE
+# AirportList: LoanList
+# IataApi: LoanApi
 
-# [START iata_api]
-@endpoints.api(name='iata', version='v1')
-class IataApi(remote.Service):
+# [START loanbook_api]
+@endpoints.api(name='loanbook', version='v1')
+class LoanApi(remote.Service):
     @endpoints.method(
-        IATA_RESOURCE,
-        Airport,
-        path='airport/{iata}',
+        LOAN_RESOURCE,
+        Loan_app,
+        path='loan_app/{loan_id}',
         http_method='GET',
-        name='get_airport')
-    def get_airport(self, request):
-        if request.iata not in AIRPORTS:
+        name='get_loan')
+    def get_loan(self, request):
+        if request.loan_id not in LOAN_BOOK:
             raise endpoints.NotFoundException()
-        return Airport(iata=request.iata, name=AIRPORTS[request.iata])
+        return Loan_app(loan_id=request.loan_id, name=LOAN_BOOK[request.loan_id])
 
+'''
     @endpoints.method(
         message_types.VoidMessage,
         AirportList,
@@ -112,8 +125,15 @@ class IataApi(remote.Service):
         AIRPORTS[request.iata] = request.name
         return Airport(iata=request.iata, name=AIRPORTS[request.iata])
 # [END iata_api]
-
+'''
 
 # [START api_server]
-api = endpoints.api_server([IataApi])
+api = endpoints.api_server([LoanApi])
 # [END api_server]
+
+
+def main():
+
+    print('weve made it this far')
+
+if __name__ == '__main__': main()

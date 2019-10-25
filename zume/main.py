@@ -38,7 +38,7 @@ LOAN_RESOURCE = endpoints.ResourceContainer(
 class Loan_app(messages.Message):
     loan_id = messages.IntegerField(1, required=True)
     loan_amnt = messages.IntegerField(2, required=False)
-    funded_amnt = messages.IntegerField(2, required=False)
+    funded_amnt = messages.IntegerField(3, required=False)
 
 
 LOAN_APP_RESOURCE = endpoints.ResourceContainer(

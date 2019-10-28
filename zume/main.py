@@ -73,7 +73,7 @@ class LoanApi(remote.Service):
     def get_loan(self, request):
         if request.loan_id not in LOAN_BOOK:
             raise endpoints.NotFoundException()
-        return Loan_app(loan_id=request.loan_id, loan_amnt=LOAN_BOOK[request.loan_amnt], funded_amnt=LOAN_BOOK[request.funded_amnt] )
+        return Loan_app(loan_id=request.loan_id, loan_amnt=LOAN_BOOK.get(request.loan_id)[request.loan_amnt], funded_amnt=LOAN_BOOK.get(request.loan_id)[request.funded_amnt])
 
 '''
     @endpoints.method(

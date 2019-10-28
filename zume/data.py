@@ -4,7 +4,7 @@ LOAN_BOOK = {
     0: {
         "loan_id": 0,
         "loan_amnt": 7000,
-        u"funded_amnt": 7000,
+        "funded_amnt": 7000,
     }
 }
 

@@ -9,6 +9,12 @@ LOAN_BOOK = {
 }
 
 
+FEATURE_KEYS = [
+    "loan_id",
+    "loan_amnt",
+    "funded_amnt"
+]
+
 '''
         "funded_amnt_inv": 6475.0,
         "term": 36,

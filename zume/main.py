@@ -25,7 +25,7 @@ from endpoints import message_types
 from endpoints import messages
 from endpoints import remote
 
-from data import LOAN_BOOK
+from data import LOAN_BOOK, FEATURE_KEYS
 
 # [END imports]
 
@@ -39,6 +39,8 @@ class Loan_app(messages.Message):
     loan_id = messages.IntegerField(1, required=True)
     loan_amnt = messages.IntegerField(2, required=False)
     funded_amnt = messages.IntegerField(3, required=False)
+    info = messages.StringField(4, required=False)
+
 
 
 LOAN_APP_RESOURCE = endpoints.ResourceContainer(
@@ -73,23 +75,27 @@ class LoanApi(remote.Service):
     def get_loan(self, request):
         if request.loan_id not in LOAN_BOOK:
             raise endpoints.NotFoundException()
-        return Loan_app(loan_id=request.loan_id, loan_amnt = 100, funded_amnt = 68)
-        # loan_amnt=LOAN_BOOK.get(request.loan_id)[request.loan_amnt], funded_amnt=LOAN_BOOK.get(request.loan_id)[request.funded_amnt])
+        temp_app = Loan_app()
+        for keys in FEATURE_KEYS:
+            setattr(temp_app, keys, LOAN_BOOK.get(request.loan_id)[keys])
+        return temp_app
+        # Loan_app(loan_id=request.loan_id, loan_amnt=LOAN_BOOK.get(request.loan_id)['loan_amnt'], funded_amnt=LOAN_BOOK.get(request.loan_id)['funded_amnt'])
 
-'''
+
     @endpoints.method(
         message_types.VoidMessage,
-        AirportList,
+        LoanList,
         path='airports',
         http_method='GET',
         name='list_airports')
     def list_airports(self, request):
-        codes = AIRPORTS.keys()
+        codes = LOAN_BOOK.keys()
         codes.sort()
         return AirportList(airports=[
           Airport(iata=iata, name=AIRPORTS[iata]) for iata in codes
         ])
 
+'''
     @endpoints.method(
         IATA_RESOURCE,
         message_types.VoidMessage,

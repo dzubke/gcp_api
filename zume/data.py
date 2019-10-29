@@ -3,19 +3,8 @@
 LOAN_BOOK = {
     0: {
         "loan_id": 0,
-        "loan_amnt": 7000,
-        "funded_amnt": 7000,
-    }
-}
-
-
-FEATURE_KEYS = [
-    "loan_id",
-    "loan_amnt",
-    "funded_amnt"
-]
-
-'''
+        "loan_amnt": 7000.0,
+        "funded_amnt": 7000.0,
         "funded_amnt_inv": 6475.0,
         "term": 36,
         "int_rate": 8.88,
@@ -38,4 +27,35 @@ FEATURE_KEYS = [
         "last_pymnt_amnt": 2786.50,
         "pub_rec_bankruptcies": 0.0,
         "predict": -1,
-'''
+
+    }
+}
+
+
+FEATURE_KEYS = [
+    "loan_id",
+    "loan_amnt",
+    "funded_amnt",
+    "funded_amnt_inv",
+    "term",
+    "int_rate",
+    "installment",
+    "annual_inc",
+    "dti",
+    "delinq_2yrs",
+    "inq_last_6mths",
+    "open_acc",
+    "pub_rec",
+    "revol_bal",
+    "total_acc",
+    "total_pymnt",
+    "total_pymnt_inv",
+    "total_rec_prncp",
+    "total_rec_int",
+    "total_rec_late_fee",
+    "recoveries",
+    "collection_recovery_fee",
+    "last_pymnt_amnt",
+    "pub_rec_bankruptcies",
+    "predict"
+]

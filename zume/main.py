@@ -89,13 +89,13 @@ class LoanApi(remote.Service):
     def list_loans(self, request):
         loan_ids = LOAN_BOOK.keys()
         loan_ids.sort()
-        temp_LoanList = LoanList()
+        temp_LoanList = []
         for loan_id in loan_ids:
             temp_app = Loan_app()
             for keys in FEATURE_KEYS:
                 setattr(temp_app, keys, LOAN_BOOK.get(loan_id)[keys])
             temp_LoanList.append(temp_app)
-        return temp_LoanList
+        return LoanList(loans=temp_LoanList)
 
 '''
     @endpoints.method(

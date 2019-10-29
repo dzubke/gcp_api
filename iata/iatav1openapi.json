@@ -31,7 +31,7 @@
       "type": "object"
     }
   },
-  "host": "tutorials-256920.appspot.com",
+  "host": "zume-api-v2.appspot.com",
   "info": {
     "title": "iata",
     "version": "v1"

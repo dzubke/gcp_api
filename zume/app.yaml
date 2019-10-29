@@ -26,5 +26,5 @@ libraries:
 env_variables:
   # The following values are to be replaced by information from the output of
   # 'gcloud endpoints services deploy swagger.json' command.
-  ENDPOINTS_SERVICE_NAME: elite-replica-250500.appspot.com
-  ENDPOINTS_SERVICE_VERSION: 2016-08-01r0
+  ENDPOINTS_SERVICE_NAME: zume-api-v2.appspot.com
+  ENDPOINTS_SERVICE_VERSION: 2019-10-28r6

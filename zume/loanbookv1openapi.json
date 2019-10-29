@@ -10,8 +10,9 @@
           "format": "int64",
           "type": "string"
         },
-        "info": {
-          "type": "string"
+        "funded_amnt_inv": {
+          "format": "double",
+          "type": "number"
         },
         "loan_amnt": {
           "format": "int64",
@@ -25,6 +26,17 @@
       "required": [
         "loan_id"
       ],
+      "type": "object"
+    },
+    "MainLoanList": {
+      "properties": {
+        "loans": {
+          "items": {
+            "$ref": "#/definitions/MainLoanApp"
+          },
+          "type": "array"
+        }
+      },
       "type": "object"
     }
   },
@@ -51,6 +63,20 @@
             "description": "A successful response",
             "schema": {
               "$ref": "#/definitions/MainLoanApp"
+            }
+          }
+        }
+      }
+    },
+    "/loanbook/v1/loan_apps": {
+      "get": {
+        "operationId": "LoanApi_listLoans",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "schema": {
+              "$ref": "#/definitions/MainLoanList"
             }
           }
         }

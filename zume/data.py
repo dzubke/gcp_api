@@ -5,6 +5,7 @@ LOAN_BOOK = {
         "loan_id": 0,
         "loan_amnt": 7000,
         "funded_amnt": 7000,
+        "funded_amnt_inv": 6475.0,
     }
 }
 
@@ -12,11 +13,11 @@ LOAN_BOOK = {
 FEATURE_KEYS = [
     "loan_id",
     "loan_amnt",
-    "funded_amnt"
+    "funded_amnt",
+    "funded_amnt_inv"
 ]
 
 '''
-        "funded_amnt_inv": 6475.0,
         "term": 36,
         "int_rate": 8.88,
         "installment": 222.21,

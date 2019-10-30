@@ -119,20 +119,19 @@ class LoanApi(remote.Service):
             temp_LoanList.append(temp_app)
         return LoanList(loans=temp_LoanList)
 
-'''
     @endpoints.method(
-        IATA_RESOURCE,
+        LOAN_RESOURCE,
         message_types.VoidMessage,
-        path='airport/{iata}',
+        path='loan_app/{loan_id}',
         http_method='DELETE',
-        name='delete_airport',
+        name='delete_loanapp',
         api_key_required=True)
-    def delete_airport(self, request):
-        if request.iata not in AIRPORTS:
+    def delete_loanapp(self, request):
+        if request.loan_id not in LOAN_BOOK:
             raise endpoints.NotFoundException()
-        del AIRPORTS[request.iata]
+        del LOAN_BOOK[request.loan_id]
         return message_types.VoidMessage()
-
+'''
     @endpoints.method(
         Airport,
         Airport,

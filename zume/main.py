@@ -37,9 +37,32 @@ LOAN_RESOURCE = endpoints.ResourceContainer(
 
 class Loan_app(messages.Message):
     loan_id = messages.IntegerField(1, required=True)
-    loan_amnt = messages.IntegerField(2, required=False)
-    funded_amnt = messages.IntegerField(3, required=False)
-    funded_amnt_inv = messages.FloatField(4)
+    loan_amnt = messages.FloatField(2, required=False)
+    funded_amnt = messages.FloatField(3, required=False)
+    funded_amnt_inv = messages.FloatField(4, required=False)
+    term = messages.FloatField(5, required=False)
+    int_rate = messages.FloatField(6, required=False)
+    installment = messages.FloatField(7, required=False)
+    annual_inc = messages.FloatField(8, required=False)
+    dti = messages.FloatField(9, required=False)
+    delinq_2yrs = messages.FloatField(10, required=False)
+    inq_last_6mths = messages.FloatField(11, required=False)
+    open_acc = messages.FloatField(12, required=False)
+    pub_rec = messages.FloatField(13, required=False)
+    revol_bal = messages.FloatField(14, required=False)
+    total_acc = messages.FloatField(15, required=False)
+    total_pymnt = messages.FloatField(16, required=False)
+    total_pymnt_inv = messages.FloatField(17, required=False)
+    total_rec_prncp = messages.FloatField(18, required=False)
+    total_rec_int = messages.FloatField(19, required=False)
+    total_rec_late_fee = messages.FloatField(20, required=False)
+    recoveries = messages.FloatField(21, required=False)
+    collection_recovery_fee = messages.FloatField(22, required=False)
+    last_pymnt_amnt = messages.FloatField(23, required=False)
+    pub_rec_bankruptcies = messages.FloatField(24, required=False)
+    predict = messages.IntegerField(25, required=False)
+
+
 
 LOAN_APP_RESOURCE = endpoints.ResourceContainer(
     Loan_app,
@@ -77,7 +100,6 @@ class LoanApi(remote.Service):
         for keys in FEATURE_KEYS:
             setattr(temp_app, keys, LOAN_BOOK.get(request.loan_id)[keys])
         return temp_app
-        # Loan_app(loan_id=request.loan_id, loan_amnt=LOAN_BOOK.get(request.loan_id)['loan_amnt'], funded_amnt=LOAN_BOOK.get(request.loan_id)['funded_amnt'])
 
 
     @endpoints.method(

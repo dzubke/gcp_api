@@ -6,21 +6,105 @@
   "definitions": {
     "MainLoanApp": {
       "properties": {
+        "annual_inc": {
+          "format": "double",
+          "type": "number"
+        },
+        "collection_recovery_fee": {
+          "format": "double",
+          "type": "number"
+        },
+        "delinq_2yrs": {
+          "format": "double",
+          "type": "number"
+        },
+        "dti": {
+          "format": "double",
+          "type": "number"
+        },
         "funded_amnt": {
-          "format": "int64",
-          "type": "string"
+          "format": "double",
+          "type": "number"
         },
         "funded_amnt_inv": {
           "format": "double",
           "type": "number"
         },
+        "inq_last_6mths": {
+          "format": "double",
+          "type": "number"
+        },
+        "installment": {
+          "format": "double",
+          "type": "number"
+        },
+        "int_rate": {
+          "format": "double",
+          "type": "number"
+        },
+        "last_pymnt_amnt": {
+          "format": "double",
+          "type": "number"
+        },
         "loan_amnt": {
-          "format": "int64",
-          "type": "string"
+          "format": "double",
+          "type": "number"
         },
         "loan_id": {
           "format": "int64",
           "type": "string"
+        },
+        "open_acc": {
+          "format": "double",
+          "type": "number"
+        },
+        "predict": {
+          "format": "int64",
+          "type": "string"
+        },
+        "pub_rec": {
+          "format": "double",
+          "type": "number"
+        },
+        "pub_rec_bankruptcies": {
+          "format": "double",
+          "type": "number"
+        },
+        "recoveries": {
+          "format": "double",
+          "type": "number"
+        },
+        "revol_bal": {
+          "format": "double",
+          "type": "number"
+        },
+        "term": {
+          "format": "double",
+          "type": "number"
+        },
+        "total_acc": {
+          "format": "double",
+          "type": "number"
+        },
+        "total_pymnt": {
+          "format": "double",
+          "type": "number"
+        },
+        "total_pymnt_inv": {
+          "format": "double",
+          "type": "number"
+        },
+        "total_rec_int": {
+          "format": "double",
+          "type": "number"
+        },
+        "total_rec_late_fee": {
+          "format": "double",
+          "type": "number"
+        },
+        "total_rec_prncp": {
+          "format": "double",
+          "type": "number"
         }
       },
       "required": [
